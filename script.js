@@ -87,9 +87,7 @@ function getNumbersfromString(){
     let arrFromBuffer = [...topBuffer];
     const operatorIndex = arrFromBuffer.findIndex(element => operatorList.includes(element));
     let firstNumberString = topBuffer.substring(0,operatorIndex) + ".0";
-    console.log(firstNumberString);
     let secondNumberString = topBuffer.substring(operatorIndex+1, topBuffer.length) + ".0";
-    console.log(secondNumberString);
     firstNumber = parseFloat(firstNumberString);
     secondNumber = parseFloat(secondNumberString);
 }
