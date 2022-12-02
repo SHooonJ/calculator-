@@ -12,15 +12,18 @@ let topBuffer = "";
 let botBuffer = "";
 
 let operatorList = ['+','-','/','*'];
+let operator = "";
 
 function display(element){
     let elementText = element.target.textContent;
     if(elementText === 'delete'){
-        let emptyString = "";
-        topBuffer = emptyString;
+        topBuffer = "";
         resetSignals();
     }
     else if(elementText === 'clear'){
+        if(operatorList.includes(topBuffer.charAt(topBuffer.length-2))){
+            secondNumberSignal = false;
+        }
         if(operatorList.includes(topBuffer.charAt(topBuffer.length-1))){
             operatorSignal = false;
         }
@@ -32,19 +35,36 @@ function display(element){
     }
     else if(operatorList.includes(elementText)){
         if(operatorSignal === false){
+            operator = elementText;
             topBuffer += elementText;
             operatorSignal = true;
         }
     }
     else{
+        if(operatorSignal === true){
+            secondNumberSignal = true;
+        }
         topBuffer += elementText;
     }
     screenTop.textContent = topBuffer;
 }
 
-function calculate(){
+// function calculate(){
+//     if(secondNumberSignal === false){return;}
+//     else{
+//         getNumbersfromString();
+//         switch (operator){
+//             case '*':
 
-}
+//         }
+//     }
+
+
+// }
+
+// function getNumbersfromString(){
+//     let buffe
+// }
 
 function resetSignals(){
     firstNumberSignal = true;
