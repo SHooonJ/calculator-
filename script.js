@@ -8,6 +8,9 @@ let firstNumberSignal = true;
 let operatorSignal = false;
 let secondNumberSignal = false;
 
+let firstNumber = 0.0;
+let secondNumber = 0.0;
+
 let topBuffer = "";
 let botBuffer = "";
 
@@ -18,6 +21,7 @@ function display(element){
     let elementText = element.target.textContent;
     if(elementText === 'delete'){
         topBuffer = "";
+        botBuffer = "";
         resetSignals();
     }
     else if(elementText === 'clear'){
@@ -29,9 +33,10 @@ function display(element){
         }
         let clearString = topBuffer.slice(0,-1);
         topBuffer = clearString;
+        botBuffer = "";
     }
     else if(elementText === '='){
-        calculate();
+        botBuffer = calculate();
     }
     else if(operatorList.includes(elementText)){
         if(operatorSignal === false){
@@ -47,24 +52,47 @@ function display(element){
         topBuffer += elementText;
     }
     screenTop.textContent = topBuffer;
+    screenBot.textContent = botBuffer;
+
 }
 
-// function calculate(){
-//     if(secondNumberSignal === false){return;}
-//     else{
-//         getNumbersfromString();
-//         switch (operator){
-//             case '*':
+function calculate(){
+    if(secondNumberSignal === false){return;}
+    else{
+        getNumbersfromString();
+        let answer = 0.0;
+        switch(operator){
+            case '*':
+                answer = firstNumber * secondNumber;
+                break;
+            case '+':
+                answer = firstNumber + secondNumber;
+                break;
+            case '/':
+                answer = firstNumber / secondNumber;
+                break;
+            case '-':
+                answer = firstNumber - secondNumber;
+                break;
+            default:
+                return 'error';
+        }
+        return answer;
+    }
 
-//         }
-//     }
 
+}
 
-// }
-
-// function getNumbersfromString(){
-//     let buffe
-// }
+function getNumbersfromString(){
+    let arrFromBuffer = [...topBuffer];
+    const operatorIndex = arrFromBuffer.findIndex(element => operatorList.includes(element));
+    let firstNumberString = topBuffer.substring(0,operatorIndex) + ".0";
+    console.log(firstNumberString);
+    let secondNumberString = topBuffer.substring(operatorIndex+1, topBuffer.length) + ".0";
+    console.log(secondNumberString);
+    firstNumber = parseFloat(firstNumberString);
+    secondNumber = parseFloat(secondNumberString);
+}
 
 function resetSignals(){
     firstNumberSignal = true;
