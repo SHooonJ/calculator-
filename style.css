@@ -49,7 +49,7 @@ h1{
 
 .numberPad{
     width: 100%;
-    height: 320px;
+    height: 300px;
     display: flex;
     justify-content: space-between;
     align-items: stretch;
@@ -61,7 +61,7 @@ h1{
     align-items: stretch;
     flex-wrap: wrap;
     justify-content: space-between;
-    column-gap: 5px;
+    gap: 5px;
 
 }
 
@@ -69,16 +69,19 @@ h1{
     display:flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: stretch;
 }
 
 .digit{
     width: 30%;
-    height: 50px;
-    flex-shrink: 1;
 }
 
 .operation .digit{
     width: 90%;
+}
+
+.zero{
+    width: 100%;
 }
 
 .equal{
